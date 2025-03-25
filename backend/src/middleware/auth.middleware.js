@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/user.model.js";
+import  User  from "../models/user.model.js";
 
 export const protectRoute = async (req, res, next) => {
     try {
@@ -20,7 +20,8 @@ export const protectRoute = async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
-        
+        console.log("Error in protectRoute Middleware", error.message);
+        return res.status(500).json({ message: "Internal Server Error in protectRoute Middleware" });
     }
 
 }
