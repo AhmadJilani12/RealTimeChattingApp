@@ -8,9 +8,10 @@ import LoginPage from './pages/LoginPage';
 import SettingPage from './pages/SettingPage';
 import ProfilePage from './pages/ProfilePage';
 import { Routes , Route } from 'react-router-dom';
+import { useAuthStore } from './store/useAuthStore';
 function App() {
   const [count, setCount] = useState(0)
-
+  const {authUser} = useAuthStore()
   return (
   <>
   <Navbar />
