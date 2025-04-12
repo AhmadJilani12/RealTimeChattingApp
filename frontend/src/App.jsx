@@ -8,7 +8,11 @@ function App() {
 
   return (
   <>
-  <Navbar></Navbar>
+  <Navbar />
+
+  <Routes>
+    <Route path='/' ></Route>
+  </Routes>
   </>
   )
 }
