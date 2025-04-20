@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios.jsx";
-import { signup } from "../../../backend/src/controllers/auth.controller.js";
 
 
 
@@ -24,7 +23,7 @@ export const useAuthStore = create((set) => ({
 
     signup: async(data) => {
 
-        
+
     }
 
 
