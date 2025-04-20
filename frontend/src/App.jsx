@@ -11,7 +11,13 @@ import { Routes , Route } from 'react-router-dom';
 import { useAuthStore } from './store/useAuthStore';
 function App() {
   const [count, setCount] = useState(0)
-  const {authUser} = useAuthStore()
+  const {authUser , checkAuth} = useAuthStore()
+useEffect(()=>{
+  checkAuth();
+}
+,[checkAuth]);
+
+console.log("Auth User", authUser);
   return (
   <>
   <Navbar />
