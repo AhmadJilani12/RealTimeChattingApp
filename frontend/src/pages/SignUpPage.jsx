@@ -1,8 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore';
-import { Eye, EyeOff, Mail, MessageSquare, User, Lock } from 'lucide-react';
+import { Eye, EyeOff, Mail, MessageSquare, User, Lock , Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import AuthImagePattern from '../components/AuthImagePattren';
+import toast from 'react-hot-toast';
 const SignUpPage = () => {
   const [showPassowrd, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -11,10 +13,23 @@ const SignUpPage = () => {
     password: "",
   });
   const { signup, isSigningUp } = useAuthStore();
-  const validateform = () => { };
+  const validateForm = () => {
+    if (!formData.fullName.trim()) return toast.error("Full name is required");
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
+    if (!formData.password) return toast.error("Password is required");
+    if (formData.password.length < 6) return toast.error("Password must be at least 6 characters");
+
+    return true;
+  };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const success = validateForm();
+    if (success === true) signup(formData);
   };
+
 
   return <div className='min-h-screen grid lg:grid-cols-2'>
     {/* left side of form */}
@@ -113,8 +128,8 @@ const SignUpPage = () => {
 
           <div className='text-center'>
             <p className='text-base-content/60'>
-          Already have an account? {" "}
-          
+              Already have an account? {" "}
+
               <Link to="/login" className="link link-primary">
                 Sign In
               </Link>
@@ -127,9 +142,9 @@ const SignUpPage = () => {
 
 
     {/* right side  */}
-  <AuthImagePattren title = "Join our Community"  
-  subtitle = "Join our Community"
-  />
+    <AuthImagePattern title="Join our Community"
+      subtitle="Join our Community"
+    />
   </div>
 }
 
